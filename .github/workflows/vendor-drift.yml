@@ -1,0 +1,17 @@
+# Detect Matt / Superpowers / SkillSpector pin drift. Does not bump pins.
+name: vendor-drift
+
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Monday 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check vendor drift
+        run: |
+          chmod +x ai/scripts/check-vendor-drift.sh
+          ai/scripts/check-vendor-drift.sh

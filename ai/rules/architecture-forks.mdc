@@ -1,0 +1,36 @@
+---
+description: Architecture forks — load grill-with-docs by default, ask before choosing, document decisions
+alwaysApply: true
+---
+
+# Architecture forks — grill-with-docs by default
+
+When a task admits **multiple valid approaches** with real trade-offs, **do not choose alone**.
+**Load and follow the `grill-with-docs` skill** (Matt: `grilling` + `domain-modeling`) — that is
+the default process, not an optional "grill style".
+
+## Triggers (examples)
+
+- **Mapper / adapter layer** vs **align models/interfaces to the API contract**
+- **Local state** vs **server refetch** as source of truth
+- **Normalize at the HTTP boundary** vs **propagate API vocabulary through the UI**
+- Any decision that is **hard to reverse** or **surprising without context** for a future reader
+
+## Procedure
+
+1. **Load `grill-with-docs`** and follow its process (interview via `grilling`; write glossary/ADRs via `domain-modeling`).
+2. **Name the fork** in one sentence: "Map the API response vs rename interfaces to match v1.1".
+3. **Present options** with concrete pros/cons on *this* repo (no generic advice), per the grilling frontier rounds.
+4. **Give a recommendation** — **do not implement** until the user replies.
+5. **Wait for the answer**; settle the frontier round before acting.
+6. **Record the decision** as soon as it is taken (per `domain-modeling`):
+   - Clarified term or contract → `CONTEXT.md` (glossary only)
+   - Durable trade-off (3 gates: hard to reverse, surprising without context, real compromise) → ADR under `context/adr/` (or legacy `docs/adr/` if that is what the project already uses)
+
+## Forbidden
+
+- Choosing alone when a fork is visible
+- Introducing a layer (mapper, adapter, facade) **without an explicit fork and user answer**
+- Documenting *after the fact* without having asked when the fork was visible **before** the code
+- Reinventing the grill process inline — load `grill-with-docs`
+- Falling back to Superpowers `brainstorming` (not installed; ADR 0020)
