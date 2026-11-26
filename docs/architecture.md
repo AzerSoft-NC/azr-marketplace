@@ -2,27 +2,45 @@
 
 ## Stack
 
-- Bash installers (`ai/install-skills.sh`, `ai/scripts/check-vendor-drift.sh`)
-- Pinned git vendors: Matt Pocock skills, obra/superpowers, NVIDIA SkillSpector (`ai/vendor-config.sh`)
-- Cursor personal install target: `~/.cursor/skills/` + `~/.cursor/rules/` + `~/.cursor/vendor/`
-- CI: GitHub Actions `vendor-drift` (ubuntu-latest, weekly cron)
+- Skills CLI (`npx skills`) for consumer add/update (Cursor, global `-g`)
+- Published pack: committed folders under `skills/` (SKILL.md layout)
+- Publisher: Bash (`ai/sync-vendors.sh`, `ai/install-rules.sh`, `ai/scripts/check-vendor-drift.sh`)
+- Vendor pins: Matt Pocock skills, obra/superpowers, NVIDIA SkillSpector (`ai/vendor-config.sh`)
+- CI: GitHub Actions `vendor-drift` (weekly; alert only)
 
-No application runtime (Node/Java). This repo is a skills/rules catalog only.
+No application runtime. Catalog + install tooling only.
 
 ## Structure
 
 ```text
+skills/                         # Published pack (npx skills discovers here)
 ai/
-  install-skills.sh
+  skills/{engineering,productivity,misc,deprecated}/  # house sources (+ deprecated)
+  rules/                        # Cursor .mdc (install-rules.sh)
+  sync-vendors.sh               # publisher → skills/
+  install-rules.sh              # consumer rules step
   vendor-config.sh
-  rules/
-  skills/{engineering,productivity,misc,deprecated}/
   overlays/domain-modeling/
   scripts/check-vendor-drift.sh
-  global-config/
 context/adr/
 docs/
 .github/workflows/vendor-drift.yml
+```
+
+## Flow
+
+```mermaid
+flowchart LR
+  pins[vendor-config pins]
+  sync[sync-vendors.sh]
+  pack[skills/ pack]
+  cli[npx skills add/update -g]
+  cursor["~/.cursor/skills"]
+  rules[install-rules.sh]
+  mdc["~/.cursor/rules"]
+  pins --> sync --> pack
+  pack --> cli --> cursor
+  rules --> mdc
 ```
 
 ## Also read
@@ -30,4 +48,4 @@ docs/
 - [Glossary](../CONTEXT.md)
 - [Changelog](../CHANGELOG.md)
 - [Catalog reference](ai-catalog.md)
-- [ADR 0020 — Matt + Superpowers hybrid](../context/adr/0020-matt-superpowers-hybrid.md)
+- [ADR 0021 — Skills CLI published pack](../context/adr/0021-skills-cli-published-pack.md)

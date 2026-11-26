@@ -1,4 +1,5 @@
-# Detect Matt / Superpowers / SkillSpector pin drift. Does not bump pins.
+# Detect Matt / Superpowers / SkillSpector pin drift vs upstream.
+# Does not bump pins or rewrite skills/ — maintainers run ai/sync-vendors.sh in a PR.
 name: vendor-drift
 
 on:

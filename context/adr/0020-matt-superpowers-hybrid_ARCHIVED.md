@@ -1,3 +1,6 @@
+> * ⚠️ OBSOLETE
+> Superseded by [ADR 0021](./0021-skills-cli-published-pack.md)
+
 # ADR 0020 — Matt orchestration + Superpowers execution (pinned hybrid)
 
 ## Status
