@@ -33,5 +33,5 @@ A skill authored in this repository and shipped in the Published pack. Distinct 
 _Avoid_: Treating vendored upstream skills as house-owned
 
 **Hybrid (Matt + Superpowers)**:
-Pack composition from ADR 0020: Matt owns orchestration / domain / `code-review`; Superpowers owns TDD and debug. No plugins; caveman stays always-on via Rules install. Target harness for now: **Cursor only**.
+Pack composition from ADR 0021 (was 0020): Matt owns orchestration / domain / `code-review`; Superpowers owns TDD and debug. No plugins; caveman stays always-on via Rules install. Target harness for now: **Cursor only**.
 _Avoid_: Full Matt execution stack, full Superpowers plugin hooks, Claude Code as a current install target

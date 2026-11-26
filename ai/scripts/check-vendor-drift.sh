@@ -7,12 +7,8 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 # shellcheck source=../vendor-config.sh
 source "$ROOT/vendor-config.sh"
 
-if [[ -n "${SUDO_USER:-}" && "${SUDO_USER}" != "root" ]]; then
-  TARGET_HOME="$(getent passwd "$SUDO_USER" | cut -d: -f6)"
-else
-  TARGET_HOME="${HOME}"
-fi
-VENDOR_DIR="${VENDOR_DIR:-$TARGET_HOME/.cursor/vendor}"
+# Publisher clones live under ai/.vendor (gitignored). Override with VENDOR_DIR.
+VENDOR_DIR="${VENDOR_DIR:-$ROOT/.vendor}"
 
 ensure_clone() {
   local name="$1"
